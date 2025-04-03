@@ -63,10 +63,10 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Southwest inspired colors
-				southwest: {
-					blue: '#304CB2',
-					red: '#E31837',
+				// Rebook Club colors
+				rebook: {
+					red: 'rgb(220 89 84)',
+					blue: '#304CB2',  // Keeping this for reference
 					yellow: '#FFBF27',
 					gray: '#5D5D5D',
 					lightgray: '#F3F3F3'

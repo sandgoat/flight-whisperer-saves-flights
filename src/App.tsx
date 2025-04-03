@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
 import Pricing from "./pages/Pricing";
+import HowItWorks from "./pages/HowItWorks";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,8 +20,8 @@ const App = () => (
     <HelmetProvider>
       <TooltipProvider>
         <Helmet
-          titleTemplate="%s | Flight Whisperer"
-          defaultTitle="Flight Whisperer - Save Money on Southwest Flights"
+          titleTemplate="%s | Rebook Club"
+          defaultTitle="Rebook Club - Save Money on Your Flights"
         />
         <Toaster />
         <Sonner />
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/settings" element={<Account />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             {/* Add more routes as needed */}
             <Route path="*" element={<NotFound />} />
           </Routes>

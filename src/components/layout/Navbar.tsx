@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const navLinks = [
     { title: "Home", path: "/" },
-    { title: "How It Works", path: "/#how-it-works" },
+    { title: "How It Works", path: "/how-it-works" },
     { title: "Pricing", path: "/pricing" },
     { title: "FAQ", path: "/#faq" },
   ];
@@ -27,8 +27,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-southwest-blue">Flight</span>
-            <span className="text-xl font-bold text-southwest-red">Whisperer</span>
+            <span className="text-xl font-bold text-rebook-red">Rebook</span>
+            <span className="text-xl font-bold text-gray-800">Club</span>
           </div>
         </Link>
 
@@ -38,8 +38,8 @@ const Navbar = () => {
             <Link
               key={link.title}
               to={link.path}
-              className={`text-sm font-medium transition-colors hover:text-southwest-blue ${
-                location.pathname === link.path ? "text-southwest-blue" : "text-gray-600"
+              className={`text-sm font-medium transition-colors hover:text-rebook-red ${
+                location.pathname === link.path ? "text-rebook-red" : "text-gray-600"
               }`}
             >
               {link.title}
@@ -58,7 +58,7 @@ const Navbar = () => {
               </Button>
               <Button 
                 variant="ghost" 
-                className="flex items-center space-x-2 text-southwest-red"
+                className="flex items-center space-x-2 text-red-600"
               >
                 <LogOut size={18} />
                 <span>Logout</span>
@@ -73,7 +73,7 @@ const Navbar = () => {
                 Login
               </Button>
               <Button 
-                className="bg-southwest-blue hover:bg-opacity-90 text-white"
+                className="bg-rebook-red hover:bg-opacity-90 text-white"
                 onClick={() => navigate('/auth?mode=signup')}
               >
                 Get Started
@@ -98,8 +98,8 @@ const Navbar = () => {
               <Link
                 key={link.title}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-southwest-blue ${
-                  location.pathname === link.path ? "text-southwest-blue" : "text-gray-600"
+                className={`text-sm font-medium transition-colors hover:text-rebook-red ${
+                  location.pathname === link.path ? "text-rebook-red" : "text-gray-600"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -122,7 +122,7 @@ const Navbar = () => {
                 </Button>
                 <Button 
                   variant="ghost" 
-                  className="flex items-center justify-start space-x-2 text-southwest-red"
+                  className="flex items-center justify-start space-x-2 text-red-600"
                 >
                   <LogOut size={18} />
                   <span>Logout</span>
@@ -141,7 +141,7 @@ const Navbar = () => {
                   Login
                 </Button>
                 <Button 
-                  className="bg-southwest-blue hover:bg-opacity-90 text-white justify-start"
+                  className="bg-rebook-red hover:bg-opacity-90 text-white justify-start"
                   onClick={() => {
                     navigate('/auth?mode=signup');
                     setIsMenuOpen(false);

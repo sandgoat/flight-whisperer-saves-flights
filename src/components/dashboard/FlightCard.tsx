@@ -14,13 +14,15 @@ interface FlightCardProps {
     originalPrice: number;
     currentPrice: number | null;
     savings: number;
+    pointsSavings: number;
     status: 'monitoring' | 'rebooked' | 'completed';
     lastChecked: string;
   };
   onDelete: (id: string) => void;
+  bookingMode: string;
 }
 
-const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
+const FlightCard = ({ flight, onDelete, bookingMode }: FlightCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const { toast } = useToast();
   
@@ -36,6 +38,13 @@ const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
       });
       setIsDeleting(false);
     }, 500);
+  };
+  
+  const handleManualRebook = () => {
+    toast({
+      title: "Ready to rebook",
+      description: "We'll take you to the airline site to complete your rebooking.",
+    });
   };
   
   const getStatusBadge = () => {
@@ -70,7 +79,7 @@ const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
         <div className="flex justify-between items-start">
           <div>
             <div className="flex items-center space-x-2">
-              <Plane className="h-5 w-5 text-southwest-blue" />
+              <Plane className="h-5 w-5 text-rebook-red" />
               <h3 className="font-bold text-lg">
                 {flight.from} → {flight.to}
               </h3>
@@ -92,7 +101,7 @@ const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
                   <div className="text-sm font-medium text-red-600 line-through">
                     ${flight.originalPrice.toFixed(2)}
                   </div>
-                  <div className="text-xl font-bold text-southwest-blue">
+                  <div className="text-xl font-bold text-rebook-red">
                     ${(flight.originalPrice - flight.savings).toFixed(2)}
                   </div>
                 </>
@@ -103,8 +112,13 @@ const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
               )}
             </div>
             {flight.savings > 0 && (
-              <div className="mt-1 text-sm font-medium text-green-600">
-                Saved ${flight.savings.toFixed(2)}
+              <div className="flex flex-col">
+                <div className="mt-1 text-sm font-medium text-green-600">
+                  Saved ${flight.savings.toFixed(2)}
+                </div>
+                <div className="text-xs text-gray-500">
+                  {flight.pointsSavings.toLocaleString()} points
+                </div>
               </div>
             )}
           </div>
@@ -118,20 +132,34 @@ const FlightCard = ({ flight, onDelete }: FlightCardProps) => {
         <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
           <div className="text-sm text-gray-500">
             {flight.status === 'monitoring' 
-              ? 'Checked every 30 minutes' 
+              ? bookingMode === 'automatic' 
+                ? 'Will automatically rebook if price drops'
+                : 'Will notify you when price drops'
               : flight.status === 'rebooked' 
                 ? 'Successfully rebooked at lower price' 
                 : 'Flight completed'}
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
-            onClick={handleDelete}
-            disabled={isDeleting}
-          >
-            <Trash2 size={16} />
-          </Button>
+          <div className="flex space-x-2">
+            {bookingMode === 'manual' && flight.status === 'monitoring' && flight.currentPrice && flight.currentPrice < flight.originalPrice && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-rebook-red border-rebook-red hover:bg-rebook-red hover:text-white"
+                onClick={handleManualRebook}
+              >
+                Rebook
+              </Button>
+            )}
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+              onClick={handleDelete}
+              disabled={isDeleting}
+            >
+              <Trash2 size={16} />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

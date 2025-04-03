@@ -61,8 +61,8 @@ const Account = () => {
     // Simulate API call
     setTimeout(() => {
       toast({
-        title: "Southwest credentials updated",
-        description: "Your Southwest credentials have been securely updated.",
+        title: "Airline credentials updated",
+        description: "Your airline credentials have been securely updated.",
       });
       setIsSaving(false);
     }, 1000);
@@ -75,7 +75,7 @@ const Account = () => {
   return (
     <>
       <Helmet>
-        <title>Account Settings - Flight Whisperer</title>
+        <title>Account Settings - Rebook Club</title>
       </Helmet>
       
       <DashboardLayout>
@@ -152,7 +152,7 @@ const Account = () => {
                 <div className="pt-2">
                   <Button 
                     type="submit" 
-                    className="bg-southwest-blue text-white"
+                    className="bg-rebook-red text-white"
                     disabled={isSaving}
                   >
                     {isSaving ? "Saving..." : "Save Changes"}
@@ -164,7 +164,7 @@ const Account = () => {
           
           <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-bold">Southwest Account</h2>
+              <h2 className="text-xl font-bold">Airline Account</h2>
               <p className="text-gray-600 text-sm mt-1">
                 Your credentials are encrypted and only used to rebook flights when prices drop
               </p>
@@ -173,7 +173,7 @@ const Account = () => {
             <div className="p-6">
               <form onSubmit={handleSaveSouthwest} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="sw_username">Southwest Username</Label>
+                  <Label htmlFor="sw_username">Airline Username</Label>
                   <div className="relative">
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                       <User size={18} />
@@ -189,7 +189,7 @@ const Account = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="sw_password">Southwest Password</Label>
+                  <Label htmlFor="sw_password">Airline Password</Label>
                   <div className="relative">
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                       <Lock size={18} />
@@ -215,7 +215,7 @@ const Account = () => {
                 <div className="pt-2">
                   <Button 
                     type="submit" 
-                    className="bg-southwest-blue text-white"
+                    className="bg-rebook-red text-white"
                     disabled={isSaving}
                   >
                     {isSaving ? "Saving..." : "Save Credentials"}
@@ -234,8 +234,8 @@ const Account = () => {
               <div className="flex flex-col md:flex-row md:items-center justify-between">
                 <div>
                   <div className="flex items-center mb-2">
-                    <CreditCard className="h-5 w-5 text-southwest-blue mr-2" />
-                    <h3 className="font-semibold">Flight Saver Subscription</h3>
+                    <CreditCard className="h-5 w-5 text-rebook-red mr-2" />
+                    <h3 className="font-semibold">Rebook Club Subscription</h3>
                   </div>
                   <p className="text-gray-600 text-sm mb-4 md:mb-0">
                     Your subscription will renew on <span className="font-medium">May 15, 2025</span>

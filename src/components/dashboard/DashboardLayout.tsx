@@ -78,14 +78,14 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       >
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-southwest-blue">Flight</span>
-            <span className="text-xl font-bold text-southwest-red">Whisperer</span>
+            <span className="text-xl font-bold text-rebook-red">Rebook</span>
+            <span className="text-xl font-bold text-gray-800">Club</span>
           </div>
         </div>
         
         <div className="p-4">
           <div className="flex items-center space-x-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-southwest-blue text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-rebook-red text-white flex items-center justify-center">
               <User size={20} />
             </div>
             <div>
@@ -99,7 +99,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <a
                 key={link.name}
                 href={link.path}
-                className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 hover:text-southwest-blue"
+                className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 hover:text-rebook-red"
               >
                 {link.icon}
                 <span>{link.name}</span>

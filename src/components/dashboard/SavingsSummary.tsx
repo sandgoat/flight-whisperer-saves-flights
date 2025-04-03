@@ -3,21 +3,30 @@ import { DollarSign, TrendingUp } from "lucide-react";
 
 interface SavingsSummaryProps {
   totalSavings: number;
+  totalPointsSavings: number;
   flightsRebooked: number;
   flightsMonitoring: number;
 }
 
-const SavingsSummary = ({ totalSavings, flightsRebooked, flightsMonitoring }: SavingsSummaryProps) => {
+const SavingsSummary = ({ 
+  totalSavings, 
+  totalPointsSavings, 
+  flightsRebooked, 
+  flightsMonitoring 
+}: SavingsSummaryProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
         <div className="flex items-start">
-          <div className="w-12 h-12 rounded-lg bg-southwest-blue bg-opacity-10 flex items-center justify-center mr-4">
-            <DollarSign className="h-6 w-6 text-southwest-blue" />
+          <div className="w-12 h-12 rounded-lg bg-rebook-red bg-opacity-10 flex items-center justify-center mr-4">
+            <DollarSign className="h-6 w-6 text-rebook-red" />
           </div>
           <div>
             <p className="text-sm text-gray-500">Total Savings</p>
-            <p className="text-2xl font-bold text-southwest-blue">${totalSavings.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-rebook-red">${totalSavings.toFixed(2)}</p>
+            <p className="text-sm text-gray-500">
+              {totalPointsSavings.toLocaleString()} points
+            </p>
           </div>
         </div>
       </div>

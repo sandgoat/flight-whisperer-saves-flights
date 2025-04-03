@@ -7,9 +7,11 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import FlightCard from "@/components/dashboard/FlightCard";
 import AddFlightForm from "@/components/dashboard/AddFlightForm";
 import SavingsSummary from "@/components/dashboard/SavingsSummary";
+import BookingPreferences from "@/components/dashboard/BookingPreferences";
 
 const Dashboard = () => {
   const [isAddingFlight, setIsAddingFlight] = useState(false);
+  const [bookingMode, setBookingMode] = useState('automatic');
   
   // Mock data
   const [flights, setFlights] = useState([
@@ -22,6 +24,7 @@ const Dashboard = () => {
       originalPrice: 189.99,
       currentPrice: 61.35,
       savings: 128.64,
+      pointsSavings: Math.round(128.64 / 0.013),
       status: 'rebooked',
       lastChecked: "2 hours ago",
     },
@@ -34,6 +37,7 @@ const Dashboard = () => {
       originalPrice: 213.50,
       currentPrice: 119.00,
       savings: 94.50,
+      pointsSavings: Math.round(94.50 / 0.013),
       status: 'rebooked',
       lastChecked: "1 hour ago",
     },
@@ -46,6 +50,7 @@ const Dashboard = () => {
       originalPrice: 278.99,
       currentPrice: 154.31,
       savings: 124.68,
+      pointsSavings: Math.round(124.68 / 0.013),
       status: 'rebooked',
       lastChecked: "30 minutes ago",
     },
@@ -58,13 +63,19 @@ const Dashboard = () => {
       originalPrice: 195.50,
       currentPrice: null,
       savings: 0,
+      pointsSavings: 0,
       status: 'monitoring',
       lastChecked: "Just now",
     },
   ] as any[]);
   
   const handleAddFlight = (newFlight: any) => {
-    setFlights((prev) => [newFlight, ...prev]);
+    // Add pointsSavings calculation for new flights
+    const flightWithPoints = {
+      ...newFlight,
+      pointsSavings: newFlight.savings > 0 ? Math.round(newFlight.savings / 0.013) : 0
+    };
+    setFlights((prev) => [flightWithPoints, ...prev]);
     setIsAddingFlight(false);
   };
   
@@ -72,14 +83,19 @@ const Dashboard = () => {
     setFlights((prev) => prev.filter((flight) => flight.id !== id));
   };
   
+  const handleBookingModeChange = (mode: string) => {
+    setBookingMode(mode);
+  };
+  
   const totalSavings = flights.reduce((acc, flight) => acc + flight.savings, 0);
+  const totalPointsSavings = flights.reduce((acc, flight) => acc + flight.pointsSavings, 0);
   const flightsRebooked = flights.filter((flight) => flight.status === 'rebooked').length;
   const flightsMonitoring = flights.filter((flight) => flight.status === 'monitoring').length;
   
   return (
     <>
       <Helmet>
-        <title>Dashboard - Flight Whisperer</title>
+        <title>Dashboard - Rebook Club</title>
       </Helmet>
       
       <DashboardLayout>
@@ -88,7 +104,7 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <Button 
               onClick={() => setIsAddingFlight(true)}
-              className="bg-southwest-blue text-white"
+              className="bg-rebook-red text-white"
               disabled={isAddingFlight}
             >
               <Plus className="mr-2 h-4 w-4" />
@@ -96,8 +112,14 @@ const Dashboard = () => {
             </Button>
           </div>
           
+          <BookingPreferences 
+            bookingMode={bookingMode} 
+            onModeChange={handleBookingModeChange} 
+          />
+          
           <SavingsSummary 
             totalSavings={totalSavings}
+            totalPointsSavings={totalPointsSavings}
             flightsRebooked={flightsRebooked}
             flightsMonitoring={flightsMonitoring}
           />
@@ -117,6 +139,7 @@ const Dashboard = () => {
                   key={flight.id} 
                   flight={flight} 
                   onDelete={handleDeleteFlight}
+                  bookingMode={bookingMode}
                 />
               ))}
             </div>
@@ -125,11 +148,11 @@ const Dashboard = () => {
               <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
                 <h3 className="text-lg font-medium text-gray-700 mb-2">No flights added yet</h3>
                 <p className="text-gray-500 mb-4">
-                  Add your first Southwest flight to start monitoring for price drops.
+                  Add your first flight to start monitoring for price drops.
                 </p>
                 <Button 
                   onClick={() => setIsAddingFlight(true)}
-                  className="bg-southwest-blue text-white"
+                  className="bg-rebook-red text-white"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Flight
