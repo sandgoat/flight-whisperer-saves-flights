@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
