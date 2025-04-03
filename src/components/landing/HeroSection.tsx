@@ -15,11 +15,11 @@ const HeroSection = () => {
               Never Overpay for <span className="gradient-text">Southwest Flights</span> Again
             </h1>
             <p className="text-lg text-gray-600 md:text-xl max-w-2xl">
-              Flight Whisperer automatically monitors your Southwest bookings and instantly rebooks when prices drop — saving you money while you sleep.
+              Rebook Club automatically monitors your Southwest bookings and instantly rebooks when prices drop — saving you money while you sleep.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
               <Button 
-                className="bg-southwest-blue hover:bg-opacity-90 text-white h-12 px-8 text-base"
+                className="bg-rebook-red hover:bg-opacity-90 text-white h-12 px-8 text-base"
                 onClick={() => navigate('/auth?mode=signup')}
               >
                 Start Saving Now
@@ -27,8 +27,8 @@ const HeroSection = () => {
               </Button>
               <Button 
                 variant="outline"
-                className="border-southwest-blue text-southwest-blue hover:bg-southwest-blue hover:text-white h-12 px-8 text-base"
-                onClick={() => navigate('/#how-it-works')}
+                className="border-rebook-red text-rebook-red hover:bg-rebook-red hover:text-white h-12 px-8 text-base"
+                onClick={() => navigate('/how-it-works')}
               >
                 How It Works
               </Button>
@@ -59,14 +59,14 @@ const HeroSection = () => {
           <div className="md:w-1/2 mt-10 md:mt-0 relative">
             <div className="bg-gray-100 rounded-2xl p-2 shadow-xl">
               <div className="bg-white rounded-xl overflow-hidden shadow-sm">
-                <div className="bg-southwest-blue py-4 px-6 text-white">
+                <div className="bg-rebook-red py-4 px-6 text-white">
                   <h3 className="font-bold">Flight Savings Dashboard</h3>
                 </div>
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-6">
                     <div>
                       <p className="text-sm text-gray-500">Total Savings</p>
-                      <p className="text-2xl font-bold text-southwest-blue">$347.82</p>
+                      <p className="text-2xl font-bold text-rebook-red">$347.82</p>
                     </div>
                     <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                       3 Flights Rebooked
@@ -125,8 +125,8 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-southwest-yellow rounded-full opacity-60 -z-10"></div>
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-southwest-red rounded-full opacity-60 -z-10"></div>
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-rebook-yellow rounded-full opacity-60 -z-10"></div>
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-rebook-red rounded-full opacity-60 -z-10"></div>
           </div>
         </div>
       </div>
