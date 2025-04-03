@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 const PricingSection = () => {
   const navigate = useNavigate();
   
+  const handleSignUp = () => {
+    navigate('/auth?mode=signup');
+  };
+  
   return (
     <section id="pricing" className="py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
@@ -21,13 +25,13 @@ const PricingSection = () => {
           <div className="flex flex-col lg:flex-row bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-6 md:p-8 lg:w-2/3">
               <div className="flex items-center">
-                <CreditCard className="h-6 w-6 text-southwest-blue mr-2" />
+                <CreditCard className="h-6 w-6 text-rebook-red mr-2" />
                 <h3 className="text-xl font-bold">Flight Saver Subscription</h3>
               </div>
               
               <div className="mt-6 mb-6">
                 <span className="text-4xl font-bold">$15</span>
-                <span className="text-gray-600">/month</span>
+                <span className="text-gray-600">/month per Rapid Rewards number</span>
                 <p className="text-sm text-gray-600 mt-1">Cancel anytime, no commitment required</p>
               </div>
               
@@ -78,8 +82,8 @@ const PricingSection = () => {
               
               <div className="mt-auto">
                 <Button 
-                  className="w-full bg-southwest-blue hover:bg-opacity-90 text-white h-12"
-                  onClick={() => navigate('/auth?mode=signup')}
+                  className="w-full bg-rebook-red hover:bg-opacity-90 text-white h-12"
+                  onClick={handleSignUp}
                 >
                   Start Your 7-Day Free Trial
                 </Button>

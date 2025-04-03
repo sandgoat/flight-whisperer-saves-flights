@@ -10,7 +10,10 @@ interface BookingPreferencesProps {
 const BookingPreferences = ({ bookingMode, onModeChange }: BookingPreferencesProps) => {
   return (
     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-      <h3 className="text-lg font-semibold mb-4">Booking Preferences</h3>
+      <h3 className="text-lg font-semibold mb-4">Default Booking Preferences</h3>
+      <p className="text-sm text-gray-500 mb-4">
+        This setting will be applied as the default for all new flights you add. You can override this during flight addition.
+      </p>
       
       <RadioGroup 
         value={bookingMode} 

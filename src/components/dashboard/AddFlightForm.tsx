@@ -5,18 +5,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface AddFlightFormProps {
   onAddFlight: (flight: any) => void;
   onCancel: () => void;
+  bookingMode: string;
+  onModeChange: (mode: string) => void;
 }
 
-const AddFlightForm = ({ onAddFlight, onCancel }: AddFlightFormProps) => {
+const AddFlightForm = ({ onAddFlight, onCancel, bookingMode, onModeChange }: AddFlightFormProps) => {
   const [formData, setFormData] = useState({
     from: "",
     to: "",
     date: "",
     flightNumber: "",
+    rapidRewardsNumber: "",
   });
   
   const [isLoading, setIsLoading] = useState(false);
@@ -113,6 +117,47 @@ const AddFlightForm = ({ onAddFlight, onCancel }: AddFlightFormProps) => {
               required
             />
           </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="rapidRewardsNumber">Rapid Rewards Number</Label>
+            <Input 
+              id="rapidRewardsNumber"
+              name="rapidRewardsNumber"
+              placeholder="Your Rapid Rewards #"
+              value={formData.rapidRewardsNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        
+        <div className="mt-6 border-t border-gray-100 pt-4">
+          <h4 className="font-medium mb-3">Booking Preferences</h4>
+          <RadioGroup 
+            value={bookingMode} 
+            onValueChange={onModeChange}
+            className="flex flex-col space-y-3"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="automatic" id="form-automatic" />
+              <Label htmlFor="form-automatic" className="font-medium cursor-pointer">
+                Automatic Rebooking
+              </Label>
+              <span className="text-sm text-gray-500 ml-2">
+                We'll automatically rebook your flight when prices drop
+              </span>
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="manual" id="form-manual" />
+              <Label htmlFor="form-manual" className="font-medium cursor-pointer">
+                Manual Rebooking
+              </Label>
+              <span className="text-sm text-gray-500 ml-2">
+                We'll notify you when prices drop so you can rebook yourself
+              </span>
+            </div>
+          </RadioGroup>
         </div>
         
         <div className="mt-6 flex justify-end space-x-3">
@@ -125,7 +170,7 @@ const AddFlightForm = ({ onAddFlight, onCancel }: AddFlightFormProps) => {
           </Button>
           <Button 
             type="submit" 
-            className="bg-southwest-blue text-white"
+            className="bg-rebook-red text-white"
             disabled={isLoading}
           >
             {isLoading ? (

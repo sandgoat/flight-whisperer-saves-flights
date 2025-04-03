@@ -7,11 +7,12 @@ import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import FlightCard from "@/components/dashboard/FlightCard";
 import AddFlightForm from "@/components/dashboard/AddFlightForm";
 import SavingsSummary from "@/components/dashboard/SavingsSummary";
-import BookingPreferences from "@/components/dashboard/BookingPreferences";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [isAddingFlight, setIsAddingFlight] = useState(false);
   const [bookingMode, setBookingMode] = useState('automatic');
+  const navigate = useNavigate();
   
   // Mock data
   const [flights, setFlights] = useState([
@@ -21,6 +22,7 @@ const Dashboard = () => {
       to: "PHX",
       date: "May 15, 2025",
       flightNumber: "2174",
+      rapidRewardsNumber: "RR12345678",
       originalPrice: 189.99,
       currentPrice: 61.35,
       savings: 128.64,
@@ -34,6 +36,7 @@ const Dashboard = () => {
       to: "LAS",
       date: "June 21, 2025",
       flightNumber: "3211",
+      rapidRewardsNumber: "RR12345678",
       originalPrice: 213.50,
       currentPrice: 119.00,
       savings: 94.50,
@@ -47,6 +50,7 @@ const Dashboard = () => {
       to: "ATL",
       date: "July 08, 2025",
       flightNumber: "5589",
+      rapidRewardsNumber: "RR87654321",
       originalPrice: 278.99,
       currentPrice: 154.31,
       savings: 124.68,
@@ -60,6 +64,7 @@ const Dashboard = () => {
       to: "SEA",
       date: "August 12, 2025",
       flightNumber: "1122",
+      rapidRewardsNumber: "RR87654321",
       originalPrice: 195.50,
       currentPrice: null,
       savings: 0,
@@ -92,6 +97,13 @@ const Dashboard = () => {
   const flightsRebooked = flights.filter((flight) => flight.status === 'rebooked').length;
   const flightsMonitoring = flights.filter((flight) => flight.status === 'monitoring').length;
   
+  // Get unique Rapid Rewards numbers
+  const uniqueRapidRewardsNumbers = [...new Set(flights.map(flight => flight.rapidRewardsNumber).filter(Boolean))];
+  
+  const handleSubscribe = () => {
+    navigate("/pricing");
+  };
+  
   return (
     <>
       <Helmet>
@@ -112,10 +124,32 @@ const Dashboard = () => {
             </Button>
           </div>
           
-          <BookingPreferences 
-            bookingMode={bookingMode} 
-            onModeChange={handleBookingModeChange} 
-          />
+          {uniqueRapidRewardsNumbers.length > 0 && (
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-semibold">Your Rapid Rewards Numbers</h3>
+                  <p className="text-sm text-gray-500">Monitoring {uniqueRapidRewardsNumbers.length} Rapid Rewards {uniqueRapidRewardsNumbers.length === 1 ? 'number' : 'numbers'}</p>
+                </div>
+                <Button 
+                  onClick={handleSubscribe} 
+                  className="bg-rebook-red text-white"
+                >
+                  Subscribe ($15/number)
+                </Button>
+              </div>
+              <div className="mt-4 space-y-2">
+                {uniqueRapidRewardsNumbers.map((number) => (
+                  <div key={number} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span className="font-medium">{number}</span>
+                    <span className="text-sm text-gray-500">
+                      {flights.filter(f => f.rapidRewardsNumber === number).length} flights
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           
           <SavingsSummary 
             totalSavings={totalSavings}
@@ -128,6 +162,8 @@ const Dashboard = () => {
             <AddFlightForm 
               onAddFlight={handleAddFlight}
               onCancel={() => setIsAddingFlight(false)}
+              bookingMode={bookingMode}
+              onModeChange={handleBookingModeChange}
             />
           )}
           
