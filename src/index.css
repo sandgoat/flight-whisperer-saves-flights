@@ -111,15 +111,15 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-rebook-red to-rebook-yellow bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-rebook-purple to-rebook-pink-dark bg-clip-text text-transparent;
   }
   
   .btn-primary {
-    @apply bg-rebook-red hover:bg-opacity-90 text-white rounded-md px-4 py-2 transition duration-200;
+    @apply bg-rebook-purple hover:bg-opacity-90 text-white rounded-md px-4 py-2 transition duration-200;
   }
   
   .btn-secondary {
-    @apply bg-white border border-rebook-red text-rebook-red hover:bg-rebook-red hover:text-white rounded-md px-4 py-2 transition duration-200;
+    @apply bg-white border border-rebook-purple text-rebook-purple hover:bg-rebook-purple hover:text-white rounded-md px-4 py-2 transition duration-200;
   }
   
   .card-hover {

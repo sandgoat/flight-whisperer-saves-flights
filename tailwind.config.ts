@@ -63,13 +63,17 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Rebook Club colors
+				// Rebook Club colors based on the image
 				rebook: {
-					red: 'rgb(220 89 84)',
-					blue: '#304CB2',  // Keeping this for reference
-					yellow: '#FFBF27',
+					orange: 'rgb(243, 151, 53)', // Orange color from image
+					purple: 'rgb(82, 13, 106)', // Purple color from image
+					pink: {
+						light: 'rgb(222, 184, 194)', // Light pink from image
+						dark: 'rgb(187, 53, 108)' // Dark pink/magenta from image
+					},
 					gray: '#5D5D5D',
-					lightgray: '#F3F3F3'
+					lightgray: '#F3F3F3',
+					red: 'rgb(220 89 84)' // Keeping the existing red for backward compatibility
 				}
 			},
 			borderRadius: {

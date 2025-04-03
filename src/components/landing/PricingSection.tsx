@@ -25,13 +25,14 @@ const PricingSection = () => {
           <div className="flex flex-col lg:flex-row bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-6 md:p-8 lg:w-2/3">
               <div className="flex items-center">
-                <CreditCard className="h-6 w-6 text-rebook-red mr-2" />
+                <CreditCard className="h-6 w-6 text-rebook-purple mr-2" />
                 <h3 className="text-xl font-bold">Flight Saver Subscription</h3>
               </div>
               
               <div className="mt-6 mb-6">
                 <span className="text-4xl font-bold">$15</span>
-                <span className="text-gray-600">/month per Rapid Rewards number</span>
+                <span className="text-gray-600">/month for your first Rapid Rewards number</span>
+                <p className="text-sm text-gray-600 mt-1">+$5/month for each additional Rapid Rewards number</p>
                 <p className="text-sm text-gray-600 mt-1">Cancel anytime, no commitment required</p>
               </div>
               
@@ -82,7 +83,7 @@ const PricingSection = () => {
               
               <div className="mt-auto">
                 <Button 
-                  className="w-full bg-rebook-red hover:bg-opacity-90 text-white h-12"
+                  className="w-full bg-rebook-purple hover:bg-opacity-90 text-white h-12"
                   onClick={handleSignUp}
                 >
                   Start Your 7-Day Free Trial
@@ -92,6 +93,21 @@ const PricingSection = () => {
                 </p>
               </div>
             </div>
+          </div>
+          
+          <div className="bg-gray-50 rounded-xl p-6 mt-8">
+            <h4 className="font-semibold mb-2">About Southwest Pricing</h4>
+            <p className="text-sm text-gray-600 mb-2">
+              Southwest Airlines prices on the Low Fare Calendar change frequently, often multiple times a day, based on demand, 
+              route availability, and fare class adjustments.
+            </p>
+            <p className="text-sm text-gray-600 mb-2">
+              As flights fill up, fares tend to increase. If you book a flight and the price drops, Southwest allows 
+              free rebooking at the lower fare, making it worthwhile to keep checking prices after booking.
+            </p>
+            <p className="text-sm text-gray-600">
+              We check prices for you every 30 minutes, 24/7, to catch these price drops automatically.
+            </p>
           </div>
           
           <div className="bg-gray-50 rounded-xl p-6 mt-8 text-center">

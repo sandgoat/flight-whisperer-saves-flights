@@ -13,7 +13,15 @@ interface StripeCheckoutProps {
 const StripeCheckout = ({ rapidRewardsNumbers, onSuccess, onCancel }: StripeCheckoutProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const price = rapidRewardsNumbers.length * 15;
+  
+  // Calculate price based on number of Rapid Rewards numbers
+  const calculatePrice = (numRewards: number) => {
+    if (numRewards === 0) return 0;
+    // $15 for the first + $5 for each additional
+    return numRewards === 1 ? 15 : 15 + (numRewards - 1) * 5;
+  };
+  
+  const price = calculatePrice(rapidRewardsNumbers.length);
 
   const handleCheckout = async () => {
     setIsLoading(true);
@@ -53,7 +61,21 @@ const StripeCheckout = ({ rapidRewardsNumbers, onSuccess, onCancel }: StripeChec
           <span>Rapid Rewards Numbers:</span>
           <span>{rapidRewardsNumbers.length}</span>
         </div>
-        <div className="flex justify-between font-medium">
+        {rapidRewardsNumbers.length > 0 && (
+          <>
+            <div className="flex justify-between">
+              <span>First Rapid Rewards Number:</span>
+              <span>$15.00/month</span>
+            </div>
+            {rapidRewardsNumbers.length > 1 && (
+              <div className="flex justify-between">
+                <span>Additional {rapidRewardsNumbers.length - 1} {rapidRewardsNumbers.length - 1 === 1 ? 'number' : 'numbers'}:</span>
+                <span>${((rapidRewardsNumbers.length - 1) * 5).toFixed(2)}/month</span>
+              </div>
+            )}
+          </>
+        )}
+        <div className="flex justify-between font-medium mt-2 pt-2 border-t border-gray-100">
           <span>Monthly subscription:</span>
           <span>${price.toFixed(2)}/month</span>
         </div>
@@ -65,7 +87,7 @@ const StripeCheckout = ({ rapidRewardsNumbers, onSuccess, onCancel }: StripeChec
       <Button
         onClick={handleCheckout}
         disabled={isLoading}
-        className="w-full bg-rebook-red text-white h-12"
+        className="w-full bg-rebook-purple text-white h-12"
       >
         {isLoading ? (
           <>
